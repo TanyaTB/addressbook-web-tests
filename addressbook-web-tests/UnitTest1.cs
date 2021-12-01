@@ -6,9 +6,10 @@ namespace addressbook_web_tests
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
+        [TestMethod]   
         public void TestMethod1()
         {
+            int i = 0;
         }
     }
 }
