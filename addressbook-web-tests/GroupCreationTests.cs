@@ -30,12 +30,8 @@ namespace WebAddressbookTests
         {
             try
             {
-<<<<<<< HEAD
                 
                driver.Quit();
-=======
-                driver.Quit();
->>>>>>> aadfc800c5805b3b580f5ecf16efcf5b7906af34
             }
             catch (Exception)
             {
@@ -47,7 +43,6 @@ namespace WebAddressbookTests
         [Test]
         public void TheGroupCreationTests()
         {
-<<<<<<< HEAD
             OpenHomePage();
             Login(new AccountData ("admin","secret"));
             GotoGroupsPage();
@@ -111,30 +106,6 @@ namespace WebAddressbookTests
             driver.Navigate().GoToUrl(baseURL);
         }
 
-=======
-            driver.Navigate().GoToUrl(baseURL);
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys("admin");
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).SendKeys("secret");
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-            driver.FindElement(By.Id("content")).Click();
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("test1");
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys("ts");
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys("ts");
-            driver.FindElement(By.Name("submit")).Click();
-            driver.FindElement(By.LinkText("group page")).Click();
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
->>>>>>> aadfc800c5805b3b580f5ecf16efcf5b7906af34
         private bool IsElementPresent(By by)
         {
             try
