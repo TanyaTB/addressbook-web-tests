@@ -11,13 +11,15 @@ namespace WebAddressbookTests
 {
    public class NavigationHelper : HelperBase
     {
-       
-        public NavigationHelper(IWebDriver driver) : base(driver)
+        
+        public NavigationHelper(IWebDriver driver, string baseURL) : base(driver)
         {
+           this.baseURL = baseURL;
         }
         public void GoToHomePage()
         {
-            driver.Navigate().GoToUrl("http://localhost/addressbook/");
+            driver.Navigate().GoToUrl(baseURL);
+            
         }
 
         public void GoToGroupPages()
