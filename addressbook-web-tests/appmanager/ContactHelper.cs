@@ -11,22 +11,61 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver) : base(driver)
+        public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
-        public void GoToAddNewPage()
+        public ContactHelper Create(ContactsData contactData)
+        {
+            GoToAddNewPage(); 
+            FillContactForm(contactData);
+            SubmitContactCreation();
+            ReturnToAddNewPage();
+            return this;
+        }
+        public ContactHelper Modify(ContactsData newData)
+        {
+            
+            GoToAddNewPage();
+            FillContactForm(newData);
+            SubmitContactCreation();
+            ReturnToAddNewPage();
+            return this;
+        }
+        public ContactHelper Remove(int v)
+        {
+            GoToAddNewPage();
+            SelectContcats(v);
+            RemoveContact();         
+            return this;
+        }
+        public ContactHelper SelectContcats(int index)
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+        public ContactHelper GoToAddNewPage()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
-        public void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            return this;
         }
-        public void ReturnToAddNewPage()
+        public ContactHelper ReturnToAddNewPage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
-        public void FillContactForm(ContactsDate group)
+        public ContactHelper FillContactForm(ContactsData group)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).SendKeys(group.FirstName);
@@ -37,6 +76,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("mobile")).SendKeys(group.Mobile);
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).SendKeys(group.Email);
+            return this;
         }
        
     }

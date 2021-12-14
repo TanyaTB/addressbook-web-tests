@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-   public class GroupDate
+   public class GroupData
     {
         private string name;
         private string header="";
         private string footer = "";
 
-        public GroupDate (string name, string header, string footer)
+        public GroupData (string name, string header, string footer)
         {
            
             this.name = name;
@@ -20,7 +20,7 @@ namespace WebAddressbookTests
             this.footer = footer;
 
         }
-        public GroupDate(string name)
+        public GroupData(string name)
         {
             this.name = name;
 

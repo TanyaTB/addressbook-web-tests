@@ -4,24 +4,32 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 
+
 namespace WebAddressbookTests
 {
     [TestFixture]
     public class GroupCreationTests : TestBase
     {
-       
         [Test]
         public void TheGroupCreationTests()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData ("admin","secret"));
-            app.Navigator.GoToGroupPages();
-            app.Groups.InitNewGroupCreation();
-            app.Groups.FillGroupForm(new GroupDate ("Test","1","2"));
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturnToGroupPage();
+            GroupData groupData = new GroupData("Test");
+            groupData.Header = "new ";
+            groupData.Footer = " Test";
+            app.Groups.Create(groupData);
             app.Auth.Logout();
-        }                     
-     
+        }
+
+        [Test]
+        public void EmptyGroupCreationTests()
+        {
+            GroupData groupData = new GroupData("   ");
+            groupData.Header = "  ";
+            groupData.Footer = "  ";
+
+            app.Groups.Create( groupData);
+            app.Auth.Logout();
+        }
+
     }
 }

@@ -13,14 +13,16 @@ namespace WebAddressbookTests
         [Test]
         public void TheContactCreationTests()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contacts.GoToAddNewPage();
-            app.Contacts.FillContactForm(new ContactsDate("Tatyana", "Bogatyreva", "Washington street 1050","88005687925","TYgr@gmail.com"));
-            app.Contacts.SubmitContactCreation();
-            app.Contacts.ReturnToAddNewPage();
+            ContactsData contactData = new ContactsData("Tatyana");
+            contactData.LastName = "Bogatyreva";
+            contactData.Address = "Washington street 1050";
+            contactData.Mobile = "88005687925";
+            contactData.Email = "TYgr@gmail.com";
+            
+            app.Contacts.Create(contactData);
             app.Auth.Logout();
         }
+
 
     }
 }
