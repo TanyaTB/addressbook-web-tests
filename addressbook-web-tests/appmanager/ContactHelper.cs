@@ -16,26 +16,24 @@ namespace WebAddressbookTests
         }
         public ContactHelper Create(ContactsData contactData)
         {
-            GoToAddNewPage(); 
+            InitNewContactCreation();
             FillContactForm(contactData);
             SubmitContactCreation();
-            ReturnToAddNewPage();
+            manager.Navigator.ReturnToHomePage();
             return this;
         }
         public ContactHelper Modify(ContactsData newData)
         {
-            
             GoToAddNewPage();
             FillContactForm(newData);
             SubmitContactCreation();
             ReturnToAddNewPage();
             return this;
-        }
+                   }
         public ContactHelper Remove(int v)
         {
-            GoToAddNewPage();
             SelectContcats(v);
-            RemoveContact();         
+            RemoveContact();
             return this;
         }
         public ContactHelper SelectContcats(int index)
@@ -65,17 +63,30 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
+        public ContactHelper InitNewContactCreation()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+       
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+        public ContactHelper InitContactModification(int index)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td[8]/a/img")).Click();
+            return this;
+        }
+
         public ContactHelper FillContactForm(ContactsData group)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).SendKeys(group.FirstName);
-            driver.FindElement(By.Name("lastname")).SendKeys(group.LastName);
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).SendKeys(group.Address);
-            driver.FindElement(By.Name("mobile")).Click();
-            driver.FindElement(By.Name("mobile")).SendKeys(group.Mobile);
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).SendKeys(group.Email);
+            Type(By.Name("firstname"), group.FirstName);
+            Type(By.Name("lastname"), group.LastName);
+            Type(By.Name("address"), group.Address);
+            Type(By.Name("mobile"), group.Mobile);
+            Type(By.Name("email"), group.Email);
             return this;
         }
        

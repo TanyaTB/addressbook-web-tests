@@ -9,18 +9,18 @@ namespace WebAddressbookTests
 {
     
         [TestFixture]
-        public class ContactModificationTests : TestBase
-        {
+        public class ContactModificationTests : AuthTestBase
+    {
             [Test]
             public void TheContactModificationTests()
             {
-                ContactsData newData = new ContactsData("Modify");
+                ContactsData newData = new ContactsData("Rename");
                 newData.LastName = "Bogatyreva";
                 newData.Address = "Washington street 1050";
                 newData.Mobile = "88005687925";
                 newData.Email = "TYgr@gmail.com";
 
-               app.Contacts.Modify(newData);
+            app.Contacts.Modify(newData);
 
             }
         }
