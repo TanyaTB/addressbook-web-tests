@@ -22,6 +22,26 @@ namespace WebAddressbookTests
             manager.Navigator.ReturnToHomePage();
             return this;
         }
+        public List<ContactsData> GetContactList()
+        {
+            List<ContactsData> contacts = new List<ContactsData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                contacts.Add(new ContactsData(element.Text, null));
+                Console.WriteLine(element.Text);
+                IList<IWebElement> lastnames = element.FindElements(By.CssSelector("td:nth-child(2)"));
+                IList<IWebElement> firstnames = element.FindElements(By.CssSelector("td:nth-child(3)"));
+                foreach (IWebElement lastname in lastnames) foreach (IWebElement firstname in firstnames)
+                    {
+                        contacts.Add(new ContactsData(firstname.Text, lastname.Text));
+                    }
+
+            }
+            return contacts;
+        }
         public ContactHelper Modify(ContactsData newData)
         {
             GoToAddNewPage();
@@ -39,7 +59,7 @@ namespace WebAddressbookTests
         public ContactHelper SelectContcats(int index)
         {
             driver.FindElement(By.LinkText("home")).Click();
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
         public ContactHelper RemoveContact()

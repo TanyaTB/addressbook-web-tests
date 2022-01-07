@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -18,9 +19,19 @@ namespace WebAddressbookTests
             contactData.Address = "Washington street 1050";
             contactData.Mobile = "88005687925";
             contactData.Email = "TYgr@gmail.com";
-            
+
+
+            List<ContactsData> oldContact = app.Contacts.GetContactList();
+
             app.Contacts.Create(contactData);
-            //app.Auth.Logout();
+
+            List<ContactsData> newContact = app.Contacts.GetContactList();
+
+            oldContact.Add(contactData);
+            oldContact.Sort();
+            newContact.Sort();
+            Assert.AreEqual(oldContact, newContact);
+
         }
 
 
