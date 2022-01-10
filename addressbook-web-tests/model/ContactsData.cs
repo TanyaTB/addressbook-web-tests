@@ -8,21 +8,14 @@ namespace WebAddressbookTests
 {
     public class ContactsData : IEquatable<ContactsData>, IComparable<ContactsData>
     {
-        private string firstname;
-        private string lastname;
-        private string address;
-        private string mobile;
-        private string email;
-
-
+        
         public ContactsData(string firstname, string lastname, string address, string mobile, string email)
         {
-
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.address = address;
-            this.mobile = mobile;
-            this.email = email;
+            FirstName = firstname;
+            LastName = lastname;
+            Address = address;
+            Mobile = mobile;
+            Email = email;
 
         }
         public bool Equals(ContactsData other)
@@ -35,13 +28,11 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return FirstName == other.FirstName;
-            return LastName == other.LastName;
+            return FirstName == other.FirstName && LastName == other.LastName;
         }
         public override int GetHashCode()
         {
-            return FirstName.GetHashCode();
-            return LastName.GetHashCode();
+            return LastName.GetHashCode() & FirstName.GetHashCode();
         }
         public int CompareTo(ContactsData other)
         {
@@ -49,12 +40,19 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return FirstName.CompareTo(other.FirstName);
-            return LastName.CompareTo(other.LastName);
+            if (this.FirstName != other.FirstName)
+            {
+                return FirstName.CompareTo(other.FirstName);
+            }
+            if (this.LastName != other.LastName)
+            {
+                return LastName.CompareTo(other.LastName);
+            }
+            return LastName.CompareTo(other.LastName) & FirstName.CompareTo(other.FirstName);
         }
         public override string ToString()
         {
-            return $"contact = {lastname} {firstname}";
+            return $"contact = {LastName} {FirstName}";
         }
 
 
@@ -62,69 +60,28 @@ namespace WebAddressbookTests
 
         public ContactsData(string name)
         {
-            this.firstname = name;
+            FirstName = name;
 
         }
 
-        public ContactsData(string name, string text) : this(name)
+        public ContactsData(string name, string lastName )
         {
+            FirstName = name;
+            LastName = lastName;
+
         }
 
-        public string FirstName
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
+        public string FirstName { get; set; }
 
-        public string LastName
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
-        }
-        public string Mobile
-        {
-            get
-            {
-                return mobile;
-            }
-            set
-            {
-                mobile = value;
-            }
-        }
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
-            }
+        public string LastName { get; set; }
+
+        public string Address { get; set; }
+        
+        public string Mobile { get; set; }
+
+        public string Email { get; set; }
+        
+        public string Id { get; set; }
         }
     }
-}
+

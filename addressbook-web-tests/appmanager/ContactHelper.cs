@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -22,38 +23,50 @@ namespace WebAddressbookTests
             manager.Navigator.ReturnToHomePage();
             return this;
         }
+
+        public int GetContactCount()
+        {           
+         return driver.FindElements(By.CssSelector("tr[name='entry']")).Count;
+            
+        }
+        private List<ContactsData> contactCache = null;
         public List<ContactsData> GetContactList()
         {
-            List<ContactsData> contacts = new List<ContactsData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                contacts.Add(new ContactsData(element.Text, null));
-                Console.WriteLine(element.Text);
-                IList<IWebElement> lastnames = element.FindElements(By.CssSelector("td:nth-child(2)"));
-                IList<IWebElement> firstnames = element.FindElements(By.CssSelector("td:nth-child(3)"));
-                foreach (IWebElement lastname in lastnames) foreach (IWebElement firstname in firstnames)
+                contactCache = new List<ContactsData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    //IWebElement lastname = element.FindElement(By.CssSelector("td:nth-child(2)"));
+                    //IWebElement firstname = element.FindElement(By.CssSelector("td:nth-child(3)"));
+                    //второй вариант реализации
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    IWebElement lastname = cells[1];
+                    IWebElement firstname = cells[2];
+                    contactCache.Add(new ContactsData(firstname.Text, lastname.Text)
                     {
-                        contacts.Add(new ContactsData(firstname.Text, lastname.Text));
-                    }
-
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
-            return contacts;
+            return new List<ContactsData>(contactCache);
         }
         public ContactHelper Modify(ContactsData newData)
         {
-            GoToAddNewPage();
+            SelectContcats(0);
+            InitContactModification();
             FillContactForm(newData);
-            SubmitContactCreation();
-            ReturnToAddNewPage();
+            SubmitContactModification();
+            manager.Navigator.ReturnToHomePage();
             return this;
-                   }
+        }
         public ContactHelper Remove(int v)
         {
             SelectContcats(v);
             RemoveContact();
+            manager.Navigator.GoToHomePage();
             return this;
         }
         public ContactHelper SelectContcats(int index)
@@ -66,6 +79,7 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            contactCache = null;    
             return this;
         }
         public ContactHelper GoToAddNewPage()
@@ -76,6 +90,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper ReturnToAddNewPage()
@@ -91,12 +106,14 @@ namespace WebAddressbookTests
        
         public ContactHelper InitContactModification()
         {
-            driver.FindElement(By.Name("edit")).Click();
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
             return this;
         }
-        public ContactHelper InitContactModification(int index)
+              
+        public ContactHelper SubmitContactModification()
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td[8]/a/img")).Click();
+            driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 

@@ -14,16 +14,17 @@ namespace WebAddressbookTests
         [Test]
         public void TheContactCreationTests()
         {
-            ContactsData contactData = new ContactsData("Tatyana");
-            contactData.LastName = "Bogatyreva";
+            ContactsData contactData = new ContactsData("Tatyana","Bogatyreva");
+            //contactData.LastName = 
             contactData.Address = "Washington street 1050";
             contactData.Mobile = "88005687925";
             contactData.Email = "TYgr@gmail.com";
 
-
             List<ContactsData> oldContact = app.Contacts.GetContactList();
 
             app.Contacts.Create(contactData);
+
+            Assert.AreEqual(oldContact.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactsData> newContact = app.Contacts.GetContactList();
 
