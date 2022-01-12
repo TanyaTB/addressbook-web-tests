@@ -15,9 +15,9 @@ namespace WebAddressbookTests
         public void TheContactCreationTests()
         {
             ContactsData contactData = new ContactsData("Tatyana","Bogatyreva");
-            //contactData.LastName = 
+            //contactData.LastName 
             contactData.Address = "Washington street 1050";
-            contactData.Mobile = "88005687925";
+            contactData.MobilePhone = "88005687925";
             contactData.Email = "TYgr@gmail.com";
 
             List<ContactsData> oldContact = app.Contacts.GetContactList();

@@ -17,7 +17,7 @@ namespace WebAddressbookTests
                 ContactsData newData = new ContactsData("Rename");
                 newData.LastName = "Rename";
                 newData.Address = "Washington street 1050";
-                newData.Mobile = "88005687925";
+                newData.MobilePhone = "88005687925";
                 newData.Email = "TYgr@gmail.com";
 
             List<ContactsData> oldContact = app.Contacts.GetContactList();
