@@ -15,10 +15,13 @@ namespace WebAddressbookTests
         public void TheContactCreationTests()
         {
             ContactsData contactData = new ContactsData("Tatyana","Bogatyreva");
-            //contactData.LastName 
-            contactData.Address = "Washington street 1050";
+            contactData.Middlename = "Dmitrievna";
+            contactData.Address = "Washington street 1011";
             contactData.MobilePhone = "88005687925";
-            contactData.Email = "TYgr@gmail.com";
+            contactData.Email = "Tgr@gmail.com";
+            contactData.Title = "123";
+
+
 
             List<ContactsData> oldContact = app.Contacts.GetContactList();
 

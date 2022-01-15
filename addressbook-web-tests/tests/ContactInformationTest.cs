@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests 
 {
     [TestFixture]
-    public class ContactInformationTest : AuthTestBase
+    public class ContactInformationTests : AuthTestBase
     {
         [Test]
 
@@ -16,12 +16,26 @@ namespace WebAddressbookTests
         {
            ContactsData fromTable = app.Contacts.GetContactInformationFromTable(0);
            ContactsData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+          
 
             //verification  проверки
-            Assert.AreEqual(fromTable, fromTable);
+            Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromTable.Address);
             Assert.AreEqual(fromTable.AllPhones, fromTable.AllPhones);
+            Assert.AreEqual(fromTable.AllEmail, fromForm.AllEmail);
 
+
+        }
+        [Test]
+        public void ContactDetailTest()
+        {
+            ContactsData fromDetails = app.Contacts.GetContactInformationProperties();
+            ContactsData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+
+            //verification
+            Assert.AreEqual(fromDetails, fromForm);
+            Assert.AreEqual(fromDetails.Middlename, fromForm.Middlename);
+            Assert.AreEqual(fromDetails.AllDetails, fromForm.AllDetails);
         }
 
     }
