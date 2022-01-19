@@ -57,42 +57,37 @@ namespace WebAddressbookTests
             {
                 return LastName.CompareTo(other.LastName);
             }
-            return LastName.CompareTo(other.LastName) & FirstName.CompareTo(other.FirstName);
+            return 0;
+                //LastName.CompareTo(other.LastName) & FirstName.CompareTo(other.FirstName);
         }
         public override string ToString()
         {
             return $"contact = {LastName} {FirstName}";
         }
 
-
-
-
         public ContactsData(string name)
         {
             FirstName = name;
-
         }
 
-        public ContactsData(string name, string lastName )
+        public ContactsData(string firstname, string lastName )
         {
-            FirstName = name;
+            FirstName = firstname;
             LastName = lastName;
+
+
 
         }
 
         public string FirstName { get; set; }
-
-
         public string LastName { get; set; }
         public string Middlename { get; set;}
-
         public string Address { get; set; }
-
         public string HomePhone { get; set; }
-
         public string MobilePhone { get; set;}
-
         public string WorkPhone { get; set; }
+        public string Email { get; set; }
+        public string Id { get; set; }
 
 
         public string GetAge(string day, string month, string year, string fieldName)
@@ -188,11 +183,11 @@ namespace WebAddressbookTests
             {
                 if (year != "")
                 {
-                    return fieldName + FullDate + " (" + Age + ")\r\n";
+                    return fieldName + FullDate + " (" + Age + ")";
                 }
                 else
                 {
-                    return fieldName + FullDate + "\r\n";
+                    return fieldName + FullDate;
                 }
             }
             else return "";
@@ -233,13 +228,13 @@ namespace WebAddressbookTests
             }
             if (FullDate != "")
             {
-                if (year != "")
+                if (year != null && year != "")
                 {
-                    return fieldName + FullDate + " (" + Anniversary + ")\r\n";
+                    return fieldName + FullDate + " (" + Anniversary + ")";
                 }
                 else
                 {
-                    return fieldName + FullDate + "\r\n";
+                    return fieldName + FullDate;
                 }
             }
             else return "";
@@ -254,7 +249,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUP(Email.Trim())  + CleanUP(Email2.Trim()) + CleanUP(Email3.Trim());
+                    return (ReturnDetailwithBr(Email)  + ReturnDetailwithBr(Email2)  + ReturnDetailwithBr(Email3)).Trim();
                 }
             }
             set
@@ -273,7 +268,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
+                    return (ReturnDetailwithBr(HomePhone) + ReturnDetailwithBr(MobilePhone) + ReturnDetailwithBr(WorkPhone)).Trim();
                 }
                        
             }
@@ -289,7 +284,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ -()]", ""); 
+            return Regex.Replace(phone, "[ -()]", "")+ "\r\n"; 
 
             //  (" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+"\r\n";
 
@@ -300,13 +295,11 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return Regex.Replace(email, "[ ]", "") ;//
+            return Regex.Replace(email, "[ ]", "") + "\r\n";
                 }
 
 
-        public string Email { get; set; }
         
-        public string Id { get; set; }
        
         public string AllDetails
         {
@@ -314,26 +307,19 @@ namespace WebAddressbookTests
             {
                 if (allDetails != null)
                 {
-                    return allDetails;
+                    return allDetails="";
                 }
                 else
                 {
-                    return (ReturnFullName(FirstName, Middlename, LastName) // "\r\n"
-                        + ReturnDetailwithBr(Title) + "\r\n"
-                        //+ ReturnDetailwithBr(Company)
-                        + ReturnDetailwithBr(Address) +"\r\n"+ "\r\n"
-                        + ReturnDetailwithBr(HomePhone, "H: ") 
-                        + ReturnDetailwithBr(MobilePhone, "M: ")+ "\r\n"
-                        + ReturnDetailwithBr(WorkPhone, "W: ") 
-                       // + ReturnDetailwithBr(Fax, "F: ") + "\r\n"
+                    return (ReturnFullName(FirstName, Middlename, LastName) 
+                        + ReturnDetailwithBr(Title) 
+                        + ReturnDetailwithBr(Address) + "\r\n"
+                        + ReturnDetailwithBr(HomePhone, "H: ")
+                        + ReturnDetailwithBr(MobilePhone, "M: ")
+                        + ReturnDetailwithBr(WorkPhone, "W: ")
                         + ReturnDetailwithBr(Email) 
                         + ReturnDetailwithBr(Email2) 
                         + ReturnDetailwithBr(Email3) 
-                        //  + ReturnDetailwithBr(Homepage, "Homepage:\r\n") + "\r\n"
-                        + GetAge(BDay, BMonth, BYear, "Birthday ")
-                        //+ GetAnniversary(ADay, AMonth, AYear, "Anniversary ") + "\r\n"
-                        //+ ReturnDetailwithBr(Address2) + "\r\n"
-                        //+ ReturnDetailwithBr(Phone2, "P: ") + "\r\n"
                         + ReturnDetailwithoutBr(Notes));
 
                 }
@@ -367,7 +353,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return text;
+            return text + "\r\n";
         }
 
 
@@ -377,7 +363,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return fieldName + text + "\r\n";
+            return text + "r/n";
         }
 
         public string ReturnDetailwithoutBr(string text)
@@ -386,7 +372,7 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-            return text;
+            return "\r\n\r\n" + text;
         }
 
 
@@ -420,7 +406,7 @@ namespace WebAddressbookTests
                 }
             }
 
-            return FullName + "\r\n"; 
+            return FullName; 
         } 
     }
   }
