@@ -18,6 +18,7 @@ namespace WebAddressbookTests
             contactData.Middlename = "Dmitrievna";
             contactData.Address = "Washington street 1011";
             contactData.MobilePhone = "88005687925";
+            contactData.HomePhone = "88005687925";
             contactData.Email = "Tgr@gmail.com";
             contactData.Title = "123";
 

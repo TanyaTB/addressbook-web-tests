@@ -268,7 +268,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (ReturnDetailwithBr(HomePhone) + ReturnDetailwithBr(MobilePhone) + ReturnDetailwithBr(WorkPhone)).Trim();
+                    return (ReturnDetailwithRN(HomePhone) + ReturnDetailwithRN(MobilePhone) + ReturnDetailwithRN(WorkPhone)).Trim();
                 }
                        
             }
@@ -289,17 +289,7 @@ namespace WebAddressbookTests
             //  (" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+"\r\n";
 
         }
-        private string CleanUP(string email)
-        {
-            if (email == null || email == "")
-            {
-                return "";
-            }
-            return Regex.Replace(email, "[ ]", "") + "\r\n";
-                }
-
-
-        
+              
        
         public string AllDetails
         {
@@ -307,20 +297,20 @@ namespace WebAddressbookTests
             {
                 if (allDetails != null)
                 {
-                    return allDetails="";
+                    return allDetails.Replace("\r", "").Replace("\n", "");
                 }
                 else
                 {
-                    return (ReturnFullName(FirstName, Middlename, LastName) 
+                    return (ReturnFullName(FirstName, Middlename, LastName)
                         + ReturnDetailwithBr(Title) 
-                        + ReturnDetailwithBr(Address) + "\r\n"
-                        + ReturnDetailwithBr(HomePhone, "H: ")
-                        + ReturnDetailwithBr(MobilePhone, "M: ")
-                        + ReturnDetailwithBr(WorkPhone, "W: ")
+                        + ReturnDetailwithRN(Address) 
+                        + ReturnDetailwithBr(HomePhone, "H: ") 
+                        + ReturnDetailwithBr(MobilePhone, "M: ") 
+                        + ReturnDetailwithBr(WorkPhone, "W: ") 
                         + ReturnDetailwithBr(Email) 
                         + ReturnDetailwithBr(Email2) 
                         + ReturnDetailwithBr(Email3) 
-                        + ReturnDetailwithoutBr(Notes));
+                        + ReturnDetailwithoutBr(Notes)).Replace("\r","").Replace("\n", "");
 
                 }
             }
@@ -347,24 +337,34 @@ namespace WebAddressbookTests
         public string Phone2 { get; set; }
         public string Notes { get;  set; }
 
-        public string ReturnDetailwithBr(string text)
+        public string ReturnDetailwithBr(string text, string prefix = "")
+        {
+            if (text == null || text == "")
+            {
+                return "";
+            }
+            return prefix + text;
+
+        }
+        public string ReturnDetailwithRN(string text)
         {
             if (text == null || text == "")
             {
                 return "";
             }
             return text + "\r\n";
+
         }
 
 
-        public string ReturnDetailwithBr(string text, string fieldName)
-        {
-            if (text == null || text == "")
-            {
-                return "";
-            }
-            return text + "r/n";
-        }
+       // public string ReturnDetailwithBr(string text, string fieldName)
+       // {
+       //     if (text == null || text == "")
+        //    {
+        //        return "";
+        //    }
+        //    return text + "\r\n";
+      //  }
 
         public string ReturnDetailwithoutBr(string text)
         {

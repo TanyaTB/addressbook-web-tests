@@ -236,6 +236,7 @@ namespace WebAddressbookTests
             Type(By.Name("lastname"), group.LastName);
             Type(By.Name("address"), group.Address);
             Type(By.Name("mobile"), group.MobilePhone);
+            Type(By.Name("home"), group.HomePhone);
             Type(By.Name("email"), group.Email);
             Type(By.Name("middlename"), group.Middlename);
             Type(By.Name("title"), group.Title);
