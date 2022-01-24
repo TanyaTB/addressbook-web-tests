@@ -38,27 +38,18 @@ namespace WebAddressbookTests
 
         }
 
-        internal ContactsData GetContactInformationProperties()
+        public string GetContactInformationProperties()
         {
             manager.Navigator.GoToHomePage();
             ContactsDetailsProperties(0);
-            var fullName = driver.FindElement(By.XPath("//div[@id='content']/b")).Text.Split(' ');
-            string firstName = fullName[0];
-            string middleName = fullName[1];
-            string lastName = fullName[2];
-            string allDetails = driver.FindElement(By.XPath("//div[@id='content']")).Text;
-
-            return new ContactsData(firstName, lastName)
-            {
-                Middlename = middleName,
-                AllDetails = allDetails
-            };
-
-
+            string AllDetails = driver.FindElement(By.XPath("//div[@id='content']")).Text;
+            return AllDetails;
         }
-      
 
-        public ContactsData GetContactInformationFromEditForm(int index)
+    
+    
+
+    public ContactsData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
             InitContactModification(0);
@@ -87,7 +78,7 @@ namespace WebAddressbookTests
             string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
             string notes = driver.FindElement(By.Name("notes")).Text;
 
-            return new ContactsData(firstName, lastName)
+            return new ContactsData(firstName.Trim(), lastName.Trim())
             {
                 Middlename = middleName,
                 Nickname = nickName,
@@ -111,10 +102,10 @@ namespace WebAddressbookTests
                 Address2 = address2,
                 Phone2 = phone2,
                 Notes = notes
-
             };
-
         }
+
+    
 
 
 

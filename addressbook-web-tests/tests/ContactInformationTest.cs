@@ -29,14 +29,12 @@ namespace WebAddressbookTests
         [Test]
         public void ContactDetailTest()
         {
-            ContactsData fromDetails = app.Contacts.GetContactInformationProperties();
+            string fromDetails =  app.Contacts.GetContactInformationProperties();
             ContactsData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
 
             //verification
-            Assert.AreEqual(fromDetails, fromForm);
-            Assert.AreEqual(fromDetails.Middlename, fromForm.Middlename);
-            Assert.AreEqual(fromDetails.AllDetails, fromForm.AllDetails);
-        }
+            Assert.AreEqual(fromDetails, fromForm.AllDetails);
+                 }
 
     }
 }

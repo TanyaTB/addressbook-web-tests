@@ -45,7 +45,7 @@ namespace WebAddressbookTests
                 }
             }
         }
-            public static ApplicationManager GetInstance()
+        public static ApplicationManager GetInstance()
         {
             if (! app.IsValueCreated)
             {
