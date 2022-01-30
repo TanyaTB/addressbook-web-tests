@@ -31,6 +31,11 @@ namespace WebAddressbookTests
             FirstName = name;
 
         }
+        public ContactsData()
+        {
+            
+
+        }
 
         public bool Equals(ContactsData other)
         {

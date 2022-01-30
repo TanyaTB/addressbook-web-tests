@@ -4,6 +4,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
 
 namespace WebAddressbookTests
 {
@@ -28,7 +33,20 @@ namespace WebAddressbookTests
             return contacts;
             
         }
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        public static IEnumerable<ContactsData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactsData>>(
+            File.ReadAllText(@"contacts.json"));
+        }
+        public static IEnumerable<ContactsData> ContactDataFromXmlFile()
+        {
+            return (List<ContactsData>)
+                new XmlSerializer(typeof(List<ContactsData>))
+                    .Deserialize(new StreamReader(@"contacts.xml"));
+        }
+
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void TheContactCreationTests(ContactsData contactData)
         {
            // ContactsData contactData = new ContactsData("Tatyana","Bogatyreva");
