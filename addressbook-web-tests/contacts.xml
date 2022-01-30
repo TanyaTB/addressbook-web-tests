@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfContactsData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ContactsData>
+    <FirstName>#D</FirstName>
+    <Middlename>[:^Z0==$O</Middlename>
+    <LastName>&lt;BAC%/NJX</LastName>
+    <Title>+X&lt;X</Title>
+    <Address>=#KP8.UWM66R.</Address>
+    <HomePhone>==/</HomePhone>
+    <MobilePhone>\P"K;UXEZ-</MobilePhone>
+    <Email>]['5M@:X</Email>
+    <AllPhones>==/
+\P"K;UXEZ</AllPhones>
+    <AllEmail>]['5M@:X</AllEmail>
+    <AllDetails>#D [:^Z0==$O &lt;BAC%/NJX
++X&lt;X
+=#KP8.UWM66R.
+
+H: ==/
+M: \P"K;UXEZ-
+
+]['5M@:X</AllDetails>
+    <FullNameNicknameblock>#D [:^Z0==$O &lt;BAC%/NJX</FullNameNicknameblock>
+    <TitleCompAddrBlock>+X&lt;X
+=#KP8.UWM66R.</TitleCompAddrBlock>
+    <PhonesBlock>H: ==/
+M: \P"K;UXEZ-</PhonesBlock>
+    <EmailHomepageBlock>]['5M@:X</EmailHomepageBlock>
+    <BirthAnnivBlock />
+  </ContactsData>
+  <ContactsData>
+    <FirstName>BB), _@;S</FirstName>
+    <Middlename>RF!Q&lt;.=C&gt;</Middlename>
+    <LastName>Z!Y*&gt;@</LastName>
+    <Title>-&amp;4M</Title>
+    <Address>Y1@D:`H8</Address>
+    <HomePhone>&lt;KH0;</HomePhone>
+    <MobilePhone>(1=05B)</MobilePhone>
+    <Email>0&amp;W</Email>
+    <AllPhones>&lt;KH0;
+1=05B</AllPhones>
+    <AllEmail>0&amp;W</AllEmail>
+    <AllDetails>BB), _@;S RF!Q&lt;.=C&gt; Z!Y*&gt;@
+-&amp;4M
+Y1@D:`H8
+
+H: &lt;KH0;
+M: (1=05B)
+
+0&amp;W</AllDetails>
+    <FullNameNicknameblock>BB), _@;S RF!Q&lt;.=C&gt; Z!Y*&gt;@</FullNameNicknameblock>
+    <TitleCompAddrBlock>-&amp;4M
+Y1@D:`H8</TitleCompAddrBlock>
+    <PhonesBlock>H: &lt;KH0;
+M: (1=05B)</PhonesBlock>
+    <EmailHomepageBlock>0&amp;W</EmailHomepageBlock>
+    <BirthAnnivBlock />
+  </ContactsData>
+</ArrayOfContactsData>

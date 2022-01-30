@@ -46,7 +46,7 @@ namespace WebAddressbookTests
         }
 
 
-        [Test, TestCaseSource("ContactDataFromJsonFile")]
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void TheContactCreationTests(ContactsData contactData)
         {
            // ContactsData contactData = new ContactsData("Tatyana","Bogatyreva");
