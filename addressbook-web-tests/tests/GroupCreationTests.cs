@@ -9,11 +9,12 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
+using LinqToDB;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
       {
@@ -91,12 +92,13 @@ namespace WebAddressbookTests
             // groupData.Header = "new ";
             //groupData.Footer = " Test";
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
 
+            List<GroupData> oldGroups = GroupData.GetAll();
             app.Groups.Create(groupData);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
             oldGroups.Add(groupData);
             oldGroups.Sort();
@@ -104,8 +106,28 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups, newGroups);
 
         }
+        [Test]
+        public void TestDBConnectivity()
+        {
+            // DateTime start = DateTime.Now;
+            // List<GroupData> fromUi = app.Groups.GetGroupList();
+            // DateTime end = DateTime.Now;
+            //System.Console.Out.WriteLine(end.Subtract(start));
 
-       // [Test]
+            // start = DateTime.Now;
+            //List<GroupData> fromDb = GroupData.GetAll();
+            //  end = DateTime.Now;
+            // foreach (ContactsData contact in GroupData.GetAll()[0].GetContacts())
+            //  {
+            //     System.Console.Out.WriteLine(contact);
+            //  }
+
+            foreach (ContactsData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact.Deprecated);
+            }
+        }
+        // [Test]
         // public void EmptyGroupCreationTests()
         //{
         //   GroupData groupData = new GroupData("");
@@ -127,6 +149,6 @@ namespace WebAddressbookTests
 
         //  }
 
-    
-}
+
+    }
 }

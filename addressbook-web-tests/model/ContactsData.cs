@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactsData : IEquatable<ContactsData>, IComparable<ContactsData>
     {
 
@@ -78,16 +80,33 @@ namespace WebAddressbookTests
         }
 
 
-
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
+
+        [Column(Name = "middlename")]
         public string Middlename { get; set; }
+
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
+
+        [Column(Name = "id"), PrimaryKey, Identity]
         public string Id { get; set; }
+
+        [Column(Name = "nickname")]
         public string Nickname { get; set; }
+
+        [Column(Name = "title")]
         public string Title { get; set; }
+
+        [Column(Name = "company")]
         public string Company { get; set; }
+
+        [Column(Name = "address")]
         public string Address { get; set; }
+
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
+
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
         public string Fax { get; set; }
@@ -104,6 +123,8 @@ namespace WebAddressbookTests
         public string Address2 { get; set; }
         public string Phone2 { get; set; }
         public string Notes { get; set; }
+        [Column (Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         public string GetAge(string day, string month, string year, string fieldName)
         {
@@ -700,6 +721,14 @@ namespace WebAddressbookTests
             }
 
             return FullName;
+        }
+        public static List<ContactsData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x =>x.Deprecated == "0000 - 00 - 00 00:00:00")
+                        select c).ToList();
+            }
         }
 
     }

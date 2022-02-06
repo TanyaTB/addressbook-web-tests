@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,7 +13,7 @@ using System.IO;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
+    public class ContactCreationTests : ContactTestBase
     {
         public static IEnumerable<ContactsData> RandomContactDataProvider()
         {
@@ -59,14 +59,14 @@ namespace WebAddressbookTests
 
 
 
-            List<ContactsData> oldContact = app.Contacts.GetContactList();
+            List<ContactsData> oldContact = ContactsData.GetAll();
 
             app.Contacts.Create(contactData);
 
             Assert.AreEqual(oldContact.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactsData> newContact = app.Contacts.GetContactList();
-
+            List<ContactsData> newContact = ContactsData.GetAll();
+                    
             oldContact.Add(contactData);
             oldContact.Sort();
             newContact.Sort();
