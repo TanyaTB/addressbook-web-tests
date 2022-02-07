@@ -146,6 +146,7 @@
     <Compile Include="tests\GroupRemovalTests.cs" />
     <Compile Include="tests\GroupTestBase.cs" />
     <Compile Include="tests\LoginTest.cs" />
+    <Compile Include="tests\RemovalContactFromGroupTests.cs" />
     <Compile Include="tests\Search.cs" />
     <Compile Include="tests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

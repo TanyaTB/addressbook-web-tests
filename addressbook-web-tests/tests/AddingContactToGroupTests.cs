@@ -7,12 +7,36 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    public class AddingContactToGroupTests : AuthTestBase
+    public class AddingContactToGroupTests : ContactTestBase
     {
         [Test]
 
         public void TestAddingConactToGroup()
         {
+            List<GroupData> grouplist = GroupData.GetAll();
+            List<ContactsData> contactlist = ContactsData.GetAll();
+            ContactsData newcontact = new ContactsData("Tanya", "Bogatyreva");
+            newcontact.Middlename = "Dmitrievna";
+            GroupData newgroup = new GroupData("New Group");
+
+            if (grouplist.Count == 0)
+            {
+                app.Groups.Create(newgroup);
+
+                if (contactlist.Count == 0)
+                {
+                    app.Contacts.Create(newcontact);
+                }
+            }
+            else
+            {
+                if (contactlist.Count == 0)
+                {
+                    app.Contacts.Create(newcontact);
+                }
+            }
+
+
             GroupData group = GroupData.GetAll()[0];
             List<ContactsData> oldList = group.GetContacts();
             ContactsData contact = ContactsData.GetAll().Except(oldList).First();

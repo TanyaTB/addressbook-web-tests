@@ -76,8 +76,28 @@ namespace WebAddressbookTests
             string AllDetails = driver.FindElement(By.XPath("//div[@id='content']")).Text;
             return AllDetails;
         }
- 
-    public ContactsData GetContactInformationFromEditForm(int index)
+
+        public void DeleteContactFromGroup(ContactsData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectGroupInFilter(group.Name);
+            SelectContacts(contact.Id);
+            CommitDeletingContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+
+        }
+        private void SelectGroupInFilter(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
+        }
+
+        private void CommitDeletingContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        public ContactsData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
             InitContactModification(0);
