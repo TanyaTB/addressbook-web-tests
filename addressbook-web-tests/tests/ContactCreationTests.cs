@@ -66,10 +66,11 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContact.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactsData> newContact = ContactsData.GetAll();
-                    
+            newContact.Sort();
+            contactData.Id = newContact[newContact.Count - 1].Id;
             oldContact.Add(contactData);
             oldContact.Sort();
-            newContact.Sort();
+            
             Assert.AreEqual(oldContact, newContact);
 
         }

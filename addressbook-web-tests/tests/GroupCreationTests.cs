@@ -99,10 +99,10 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = GroupData.GetAll();
-
+            newGroups.Sort();
+            groupData.Id = newGroups[newGroups.Count - 1].Id;
             oldGroups.Add(groupData);
             oldGroups.Sort();
-            newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
 
         }

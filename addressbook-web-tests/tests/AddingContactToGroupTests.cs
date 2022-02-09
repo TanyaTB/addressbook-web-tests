@@ -15,7 +15,7 @@ namespace WebAddressbookTests
         {
             List<GroupData> grouplist = GroupData.GetAll();
             List<ContactsData> contactlist = ContactsData.GetAll();
-            ContactsData newcontact = new ContactsData("Tanya", "Bogatyreva");
+            ContactsData newcontact = new ContactsData("Tatyana", "Bogatyreva");
             newcontact.Middlename = "Dmitrievna";
             GroupData newgroup = new GroupData("New Group");
 
@@ -36,9 +36,14 @@ namespace WebAddressbookTests
                 }
             }
 
-
             GroupData group = GroupData.GetAll()[0];
             List<ContactsData> oldList = group.GetContacts();
+
+            if (oldList.SequenceEqual(ContactsData.GetAll()))
+            {
+                app.Contacts.Create(newcontact);
+            }
+
             ContactsData contact = ContactsData.GetAll().Except(oldList).First();
 
             app.Contacts.AddContactToGroup(contact, group);
@@ -47,6 +52,7 @@ namespace WebAddressbookTests
             oldList.Add(contact);
             newList.Sort();
             oldList.Sort();
+
             Assert.AreEqual(oldList, newList);
 
         }

@@ -19,7 +19,7 @@ namespace WebAddressbookTests
                 ContactsData newcontact = new ContactsData("Tanya", "Bogatyreva");
                 newcontact.Middlename = "Dmitrievna";
                 GroupData newgroup = new GroupData("New Group");
-
+                
                 if (grouplist.Count == 0)
                 {
                     app.Groups.Create(newgroup);
