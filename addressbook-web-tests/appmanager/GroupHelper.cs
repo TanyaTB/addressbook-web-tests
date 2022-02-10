@@ -146,5 +146,18 @@ namespace WebAddressbookTests
             groupCache = null;
             return this;
         }
+        public GroupHelper IsGroupPresent()
+        {
+            manager.Navigator.GoToGroupPages();
+            if (!IsElementPresent(By.CssSelector("span.group")))
+            {
+                GroupData group = (new GroupData("Test"));
+                group.Header = "123";
+                group.Footer = "456";
+
+                Create(group);
+            }
+            return this;
+        }
     }
 }

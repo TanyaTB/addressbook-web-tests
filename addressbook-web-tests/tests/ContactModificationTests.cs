@@ -20,6 +20,8 @@ namespace WebAddressbookTests
                 newData.MobilePhone = "88005687925";
                 newData.Email = "TYgr@gmail.com";
 
+            app.Contacts.IsContactPresent();
+
             List<ContactsData> oldContact = ContactsData.GetAll();
             
             ContactsData toBeModified = oldContact[0];

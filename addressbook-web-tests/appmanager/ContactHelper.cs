@@ -318,5 +318,16 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//input[@name='selected[]' and @value='" + id + "']")).Click();
             return this;
         }
+        public ContactHelper IsContactPresent()
+        {
+            if (!IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")))
+            {
+                ContactsData contact = (new ContactsData("Tatyana", "Bogatyreva"));
+                contact.Middlename = "Dmitrievna";
+
+                Create(contact);
+            }
+            return this;
+        }
     }
 }

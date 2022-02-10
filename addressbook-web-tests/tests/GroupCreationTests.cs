@@ -94,6 +94,7 @@ namespace WebAddressbookTests
 
             //List<GroupData> oldGroups = app.Groups.GetGroupList();
 
+            app.Groups.IsGroupPresent();
             List<GroupData> oldGroups = GroupData.GetAll();
             app.Groups.Create(groupData);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());

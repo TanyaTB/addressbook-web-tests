@@ -16,7 +16,7 @@ namespace WebAddressbookTests
             GroupData newData = new GroupData("Modify");
             newData.Header = "Test";
             newData.Footer = "New";
-
+            app.Groups.IsGroupPresent();
             List<GroupData> oldGroups = GroupData.GetAll();
             GroupData toBeModified = oldGroups[0];
             GroupData oldData = oldGroups[0];
